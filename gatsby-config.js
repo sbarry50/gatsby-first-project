@@ -29,6 +29,14 @@ module.exports = {
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
-    // 'gatsby-plugin-offline',
+    'gatsby-plugin-offline',
+    {
+        resolve: 'gatsby-source-filesystem',
+        options: {
+            name: 'blog',
+            path: `${__dirname}/src/posts/`
+        }
+    },
+    'gatsby-transformer-remark',
   ],
 }

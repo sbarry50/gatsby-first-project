@@ -12,6 +12,14 @@ const IndexPage = ({data}) => (
     <p>{data.site.siteMetadata.description}</p>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
+    <ul>
+        {data.allFile.edges.map(({node}) => (
+            <li key={node.name}>
+                <Link to={node.name} >{node.childMarkdownRemark.frontmatter.title}</Link>
+            </li>
+        ))
+        }
+    </ul>
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
@@ -28,5 +36,18 @@ export const query = graphql`
         description
       }
     }
+    allFile(filter: {extension: {eq: "md"}}) {
+        edges {
+          node {
+            relativePath
+            name
+            childMarkdownRemark {
+              frontmatter {
+                title
+              }
+            }
+          }
+        }
+      }
   }
 `
